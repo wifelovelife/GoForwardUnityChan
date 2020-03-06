@@ -6,7 +6,6 @@ public class CubeController : MonoBehaviour {
 
     private float speed = -12f; // 移動速度
     private float deadline = -10f; // 消滅位置
-    private bool blockHit = false; // ブロックの衝突判定
 
 	// Use this for initialization
 	void Start () {
@@ -21,12 +20,26 @@ public class CubeController : MonoBehaviour {
         }
     }
 
-    // ブロック衝突時に変数blockCollisionに論理値trueを渡す
+    // ブロック衝突時に効果音を鳴らす
     void OnCollisionEnter2D(Collision2D collision) {
-        this.blockHit = true;
+        //Debug.Log(tag);
+        //Debug.Log(collision.gameObject.tag);
 
-        if (tag == "GroundTag" || tag == "BlockTag") { // 効果音をGroundTagとBlockTagに限定
+        string getTag = collision.gameObject.tag;
+        if (getTag == "GroundTag" || getTag == "BlockTag") { // GroundとBlockに限定
             GetComponent<AudioSource>().Play();
         }
+
+        //switch (tag) {
+        //    case "GroundTag":
+        //        GetComponent<AudioSource>().Play();
+        //        break;
+        //    case "BlockTag":
+        //        GetComponent<AudioSource>().Play();
+        //        break;
+        //    case "UnityChanTag":
+        //        GetComponent<AudioSource>().Stop();
+        //        break;
+        //}
     }
 }
